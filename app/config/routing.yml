@@ -1,0 +1,20 @@
+fos_user:
+    prefix: "user"
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+default:
+    resource: "@AppBundle/Controller/DefaultController.php"
+    type:     annotation
+
+page:
+    resource: "@AppBundle/Controller/PageController.php"
+    type:     annotation
+
+picture:
+    resource: "@AppBundle/Controller/PictureController.php"
+    type:     annotation
+
+category:
+    resource: "@AppBundle/Controller/CategoryController.php"
+    type:     annotation
+

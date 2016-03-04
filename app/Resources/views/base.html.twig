@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+    <div class="wrapper">
+        <header>
+            <div class="logo">logo</div>
+            <nav>
+                <ul>{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <li><a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }} <i class="fa fa-user"></i></a> </li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path("admin") }}">{% trans %}Admin{% endtrans %} <i class="fa fa-cog"></i></a> </li>
+                    {% endif %}
+
+                    <li><a href="{{ path("fos_user_security_logout") }}">{% trans %}Logout{% endtrans %} <i class="fa fa-sign-out"></i></a> </li>
+                    {% else %}
+                        <li><a href="{{ path("fos_user_security_login") }}">{% trans %}Login{% endtrans %} <i class="fa fa-sign-in"></i></a> </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <div class="content">
+            <aside>
+                <h3>{% trans %}Kategorie{% endtrans %}</h3>
+                <ul>
+                    {{ render(controller(
+                    'AppBundle:Category:categoriesList'
+                    )) }}
+                </ul>
+            </aside>
+            <div class="article">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <div class="push"></div>
+    </div>
+    <div class="footer">
+        <footer>
+            <ul>
+                <li>link1</li>
+                <li>link2</li>
+            </ul>
+        </footer>
+        <p>Krzysia</p>
+    </div>
+        {% block javascripts %}{% endblock %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </body>
+</html>

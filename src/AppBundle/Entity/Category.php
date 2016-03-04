@@ -1,0 +1,178 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Category
+ *
+ * @ORM\Table(name="category")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @UniqueEntity("shortName")
+ */
+class Category
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="shortName", type="string", length=255, unique=true)
+     */
+    private $shortName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var int
+     *
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="category", cascade={"persist", "remove"})
+     */
+    private $pages;
+
+
+    public function __construct()
+    {
+        $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Category
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set shortName
+     *
+     * @param string $shortName
+     *
+     * @return Category
+     */
+    public function setShortName($shortName)
+    {
+        $this->shortName = $shortName;
+
+        return $this;
+    }
+
+    /**
+     * Get shortName
+     *
+     * @return string
+     */
+    public function getShortName()
+    {
+        return $this->shortName;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Category
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+
+
+    /**
+     * Add page
+     *
+     * @param \AppBundle\Entity\Page $page
+     *
+     * @return Category
+     */
+    public function addPage(\AppBundle\Entity\Page $page)
+    {
+        $this->pages[] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Remove page
+     *
+     * @param \AppBundle\Entity\Page $page
+     */
+    public function removePage(\AppBundle\Entity\Page $page)
+    {
+        $this->pages->removeElement($page);
+    }
+
+    /**
+     * Get pages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+}
