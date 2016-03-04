@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="unlock_question">
+        {% if page.questionPicture %}
+        <img class="questionImage" src="/{{ page.questionPicture.getWebPath }}">
+        {% endif %}
+        <p>
+            {{ page.unlockQuestion }}
+        </p>
+        {{ form_start(unlock_form) }}
+        {{ form_end(unlock_form) }}
+    </div>
 
-{{ form_start(unlock_form) }}
-{{ form_end(unlock_form) }}
+
 
 
 {% endblock %}
