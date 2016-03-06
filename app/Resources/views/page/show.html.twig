@@ -48,6 +48,8 @@
     <div class="unlock_question">
         {% if page.questionPicture %}
             <img class="questionImage" src="/{{ page.questionPicture.getWebPath }}">
+        {% else %}
+            <img class="questionImage_default" src={{ asset('/img/klodka.png') }}>
         {% endif %}
         <p>
             {{ page.unlockQuestion }}
