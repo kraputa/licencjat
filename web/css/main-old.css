@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+}
+
+
+html, body {
+    font-family:  sans-serif;
+    margin: 0;
+    height: 100%;
+    background-color: #e9ce3f;
+
+    background-image: url("/img/circuit.png")
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    margin: 0 auto -45px;
+}
+
+
+header nav{
+    background-color: #e9ce3f;
+    height: 45px;
+    background-image:none;
+
+}
+
+header nav ul { list-style-type: none;  font-weight: lighter; float:right;}
+header  nav li {  display: inline; }
+/*nav a {  padding: .4em .8em;  text-decoration: none;  text-transform: uppercase; color:#35a5d6;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+font-size: 1.5em}*/
+
+header  nav a {    text-decoration: none;  text-transform: uppercase; color: #111111;
+
+    font-size: 1.5em}
+
+.banner{
+    height: 150px;
+}
+
+.logo{
+    margin: 9px auto 9px 55px;
+
+}
+
+.content{
+
+}
+
+aside{
+    width: 320px;
+    float:left;
+    min-height: 225px;
+}
+
+aside nav{
+    margin-top: 95px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: auto;
+    min-height: 225px;
+    background-color: #111111;
+;
+}
+
+main{
+    width: calc(100% - 320px);
+    background-color: #f4e79f;
+    float: right;
+    padding: 20px  ;
+
+}
+
+article{
+    padding: 95px;
+    background-color: white;
+}
+
+
+
+
+@media only screen and (min-width: 1200px) {
+
+
+}

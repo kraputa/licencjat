@@ -63,42 +63,25 @@ class PageController extends Controller
      */
     public function showAction($category, $page)
     {
-        $category=$this->getDoctrine()->getRepository("AppBundle:Category")->findOneBy(array(
+        $categoryRep=$this->getDoctrine()->getRepository("AppBundle:Category");
+        $category=$categoryRep->findOneBy(array(
             'shortName'=>$category));
         if(!$category) throw new NotFoundHttpException;
 
+        $allCategories=$categoryRep->findAll();
         $page=$this->getDoctrine()->getRepository("AppBundle:Page")->findOneBy(array(
             'category'=>$category,
             'shortName'=>$page));
         if(!$page) throw new NotFoundHttpException;
 
-        $view=array('page' => $page);
-        if( $this->checkAvailability($page)){
-           $view['access']=true;
-           $deleteForm = $this->createDeleteForm($page);
-           $view['delete_form'] =$deleteForm->createView();
-        }else{
-           $view['access']=false;
-           $unlockForm=$this->createUnlockForm($page);
-           $view['unlock_form']=$unlockForm->createView();
-       }
+        $view=array('page' => $page,
+            'categories'=>$allCategories,
+            'currentCategory'=>$category,
+        'deleteForm' => $this->createDeleteForm($page)->createView()
+        );
         return $this->render('page/show.html.twig', $view);
     }
-
-    /**
-     * @param $page Page
-     * @return bool
-     */
-    private function checkAvailability($page){
-        if(!$page->getUnlockQuestion()
-            || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
-            || $this->getUser()->getUnlockedPages()->contains($page)
-        )
-        {
-            return true;
-        }
-        else return false;
-    }
+    
 
     /**
      * Displays a form to edit an existing Page entity.
@@ -174,63 +157,5 @@ class PageController extends Controller
         ;
     }
 
-    /**
-     * Add access to a Page entity.
-     *
-     * @Route("/unlock_page/{id}", name="page_unlock")
-     * @Method("POST")
-     */
-    public function unlockAction(Request $request, Page $page)
-    {
-        $form = $this->createUnlockForm($page);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $answer=$form->get('answer')->getData();
-            if($answer==$page->getUnlockAnswer()){
-                $em = $this->getDoctrine()->getManager();
-                $user=$this->getUser();
-                if(!$user->getUnlockedPages()->contains($page)){
-                    $user->addUnlockedPage($page);
-                    $em->persist($user);
-                    $em->flush();
-
-                    $message=$this->get('translator')->trans('Page unlocked!');
-                    $this->addFlash(
-                        'success',
-                        $message
-                    );
-                }
-            return $this->redirectToRoute("page_show", array("category"=>$page->getCategory()->getShortName(),
-                    "page"=>$page->getShortName()));
-            }else{
-                $message=$this->get("translator")->trans("Błędna odpowiedź. Spróbuj jeszcze raz!");
-                $form->get('answer')->addError(new FormError($message));
-            }
-        }
-
-        return $this->render('page/unlock.html.twig', array(
-            'page' => $page,
-            'unlock_form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a form to unlock a Page entity.
-     *
-     * @param Page $page The Page entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createUnlockForm(Page $page)
-    {
-        return $this->createFormBuilder()
-            ->add('answer')
-            ->setAction($this->generateUrl('page_unlock', array('id' => $page->getId(), 'user' => $this->getUser())))
-            ->add('save', ButtonType::class, array(
-                'attr' => array('class' => 'save')))
-            ->setMethod('POST')
-            ->getForm()
-            ;
-    }
+    
 }

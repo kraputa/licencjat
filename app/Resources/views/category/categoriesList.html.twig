@@ -1,12 +1,14 @@
 {% for category in categories %}
 <li>
     <a href="{{ path('category_show', { 'category': category.shortName }) }}">{{ category.title }}</a>
-    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-        <ul>
-            {% for page in category.pages %}
-                <li><a href="{{ path("page_show", {"category":category.shortName, "page":page.shortName }) }}">{{ page.title}}</a></li>
-            {% endfor %}
-        </ul>
+    {% if currentCategory is defined %}
+        {% if category == currentCategory %}
+            <ul>
+                {% for page in category.pages %}
+                    <li><a href="{{ path("page_show", {"category":category.shortName, "page":page.shortName }) }}">{{ page.title}}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     {% endif %}
 </li>
 {% endfor %}

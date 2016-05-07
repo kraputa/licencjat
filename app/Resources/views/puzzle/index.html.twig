@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="section">
+    <h1>{% block title %}{% trans %}Zagadki{% endtrans %}{% endblock %}</h1>
+    {% for puzzle in puzzles %}
+        <a href="{{ path('puzzle_show', { 'id': puzzle.id }) }}">
+            <div class="puzzle-box">
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    {% if  is_granted("ROLE_ADMIN") or app.user.getUnlockedPuzzles.contains(puzzle) %}
+                        <div class="puzzle-image locked-image">
+                        <div class="after"><img src="/img/badge.png"></div>
+                    {% else %}
+                        <div class="puzzle-image">
+                    {% endif %}
+                {% else %}
+                     <div class="puzzle-image">
+
+                {%  endif %}
+                    {% if puzzle.questionPicture %}
+                        <img class="questionImage" src="/{{ puzzle.questionPicture.getWebPath }}">
+                    {% else %}
+                        <img class="default_questionImage" src={{ asset('/img/klodka.png') }}>
+                    {% endif %}
+                </div>
+                <div class="puzzle-title">
+                    <p>{{ puzzle.title }}</p>
+                </div>
+            </div>
+        
+        </a>
+       
+    {%  endfor %}
+    
+</div>
+
+    <ul>
+        <li>
+            <a href="{{ path('puzzle_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

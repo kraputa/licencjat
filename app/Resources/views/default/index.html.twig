@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}{% endblock %}
-{% block title %}{% trans %}Homepage{% endtrans %}{% endblock %}
-{% block body %}<div>
-    <h1>Strona główna</h1>
+{% block headtitle %}{% trans %}Homepage{% endtrans %}{% endblock %}
+{% block body %}<div class="section">
+    <h1>{% block title %}{% trans %}Strona główna{% endtrans %}{% endblock %}</h1>
+    <h2>{% trans %}Ostatnio dodane:{% endtrans %}</h2>
 
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec fringilla diam. Nam eu lacus posuere, sollicitudin sem sollicitudin, interdum tellus. In ac erat vulputate, mattis ex vel, tempus tortor. Nunc sed elit non sapien fermentum porttitor. Proin varius neque nec diam blandit porta. Nullam blandit lectus in ex lacinia, id congue lacus interdum. Nam feugiat nunc lectus, sed facilisis justo pellentesque dictum. Nunc sagittis aliquam nibh non sollicitudin. Aliquam diam felis, rhoncus ut tincidunt sed, luctus et lectus. Donec ut hendrerit metus. Nulla tempus, mauris a sollicitudin dapibus, nulla enim ullamcorper lorem, eu faucibus sem neque in metus. Aenean pellentesque sapien ut elementum rhoncus. Morbi auctor lectus vitae tincidunt finibus.
@@ -14,6 +15,7 @@
         <p>
             Sed id vestibulum orci, vitae mollis metus. Nam pulvinar vitae nisi at posuere. Ut posuere mauris ac ornare fermentum. Donec vel urna sit amet nisl fermentum venenatis eget eu ante. Donec aliquam ultricies blandit. Etiam facilisis metus magna, eget aliquet est ullamcorper fringilla. Morbi ultricies, leo ac tincidunt aliquam, orci risus faucibus eros, nec malesuada felis nunc scelerisque nisi. Aliquam volutpat cursus posuere. Duis malesuada augue non tortor consequat, ut suscipit eros feugiat. Aliquam vel mollis justo. Vivamus ante ligula, scelerisque id placerat vitae, faucibus eu neque. Sed facilisis facilisis varius. Nunc ut facilisis mauris, in fringilla libero. Morbi scelerisque varius malesuada. Duis fringilla, augue quis placerat faucibus, justo tortor finibus metus, nec rhoncus magna purus sed massa. In hac habitasse platea dictumst.
         </p>
+    <h2>Akapit</h2>
         <p>
 
 

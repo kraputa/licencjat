@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% block aside_nav %}
+    <h3>{% trans %}Kategorie{% endtrans %}</h3>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('category_show', { 'category': category.shortName }) }}">{{ category.title }}</a>
+                {% if currentCategory is defined %}
+                    {% if category == currentCategory %}
+                        <ul>
+                            {% for page in category.pages %}
+                                <li><a href="{{ path("page_show", {"category":category.shortName, "page":page.shortName }) }}">{{ page.title}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
 {% block body %}
     <h1>Category</h1>
 

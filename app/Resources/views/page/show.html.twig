@@ -1,10 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block aside_nav %}
+    <h3>{% trans %}Kategorie{% endtrans %}</h3>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('category_show', { 'category': category.shortName }) }}">{{ category.title }}</a>
+                {% if currentCategory is defined %}
+                    {% if category == currentCategory %}
+                        <ul>
+                            {% for page in category.pages %}
+                                <li><a href="{{ path("page_show", {"category":category.shortName, "page":page.shortName }) }}">{{ page.title}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+
 {% block body %}
-
-    {% if access %}
     <h1>Page</h1>
-
     <table>
         <tbody>
             <tr>
@@ -21,15 +40,7 @@
             </tr>
             <tr>
                 <th>Body</th>
-                <td>{{ page.body }}</td>
-            </tr>
-            <tr>
-                <th>Unlockquestion</th>
-                <td>{{ page.unlockQuestion }}</td>
-            </tr>
-            <tr>
-                <th>Unlockanswer</th>
-                <td>{{ page.unlockAnswer }}</td>
+                <td>{{ page.body |raw}}</td>
             </tr>
         </tbody>
     </table>
@@ -39,23 +50,9 @@
             <a href="{{ path('page_edit', { 'id': page.id }) }}">Edit</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
+            {{ form_start(deleteForm) }}
                 <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            {{ form_end(deleteForm) }}
         </li>
     </ul>
-{% else %}
-    <div class="unlock_question">
-        {% if page.questionPicture %}
-            <img class="questionImage" src="/{{ page.questionPicture.getWebPath }}">
-        {% else %}
-            <img class="questionImage_default" src={{ asset('/img/klodka.png') }}>
-        {% endif %}
-        <p>
-            {{ page.unlockQuestion }}
-        </p>
-        {{ form_start(unlock_form) }}
-        {{ form_end(unlock_form) }}
-    </div>
-{% endif %}
 {% endblock %}

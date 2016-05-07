@@ -4,10 +4,11 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
-class CategoryType extends AbstractType
+class PuzzleType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,12 +18,24 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('shortName')
-            ->add('description',CKEditorType::class,array(
+            ->add('body',CKEditorType::class,array(
                 'config' => array(
                     'uiColor' => '#ffffff',
                     //...
                 ),
+            ))
+            ->add('unlockQuestion')
+            ->add('unlockAnswer')
+            ->add('questionPicture', EntityType::class, array(
+                'class' => 'AppBundle:Picture',
+                'choice_label' => 'name',
+                'required' => false,
+            ))
+            ->add('pages', EntityType::class, array(
+                'class' => 'AppBundle:Page',
+                'choice_label' => 'title',
+                'multiple'=>true,
+                'required' => false,
             ))
         ;
     }
@@ -33,7 +46,7 @@ class CategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Category'
+            'data_class' => 'AppBundle\Entity\Puzzle'
         ));
     }
 }

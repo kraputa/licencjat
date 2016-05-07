@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link href='http://fonts.googleapis.com/css?family=Slabo+13px&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8" />
 
-    <div class="wrapper">
-        <header>
-            <div class="logo"><a href="{{ path("homepage") }}"><img src={{ asset('/img/lem_nav2.png') }}></a></div>
-            <nav>
-                <ul>{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                        <li><a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }} <i class="fa fa-user"></i></a> </li>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <li><a href="{{ path("admin") }}">{% trans %}Admin{% endtrans %} <i class="fa fa-cog"></i></a> </li>
-                    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                    <li><a href="{{ path("fos_user_security_logout") }}">{% trans %}Logout{% endtrans %} <i class="fa fa-sign-out"></i></a> </li>
-                    {% else %}
-                        <li><a href="{{ path("fos_user_security_login") }}">{% trans %}Login{% endtrans %} <i class="fa fa-sign-in"></i></a> </li>
-                        <li><a href="{{ path("fos_user_registration_register") }}">{% trans %}Register{% endtrans %} <i class="fa fa-user-plus"></i></a> </li>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,100' rel='stylesheet' type='text/css'>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
 
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>
-        <div class="content">
-            <aside>
-                <h3>{% trans %}Kategorie{% endtrans %}</h3>
-                <ul>
-                    {{ render(controller(
-                    'AppBundle:Category:categoriesList'
-                    )) }}
-                </ul>
-            </aside>
-            <div class="article">
-                {% block fos_user_content %}{% endblock %}
-            </div>
-        </div>
-        <div class="push"></div>
-    </div>
-    <div class="footer">
-        <footer>
+<div class="wrapper">
+    <header>
+        <nav>
             <ul>
-                <li><a href="">link1</a> </li>
-                <li><a href="">link2</a> </li>
+                <li><a href="">{% trans %}O serwisie{% endtrans %}</a> </li>
+                <li><a href="{{ path("category_index") }}">{% trans %}Artykuły{% endtrans %}</a> </li>
+
+                <li><a href="{{ path("puzzle_index") }}">{% trans %}Zagadki{% endtrans %}</a> </li>
+
+
+
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path("admin") }}">{% trans %}Admin{% endtrans %}</a> </li>
+                    {% endif %}
+                    <li><a href="{{ path("fos_user_profile_show") }}">{{ app.user.username }} <i class="fa fa-user"></i></a> </li>
+                    <li><a href="{{ path("fos_user_security_logout") }}">{% trans %}Wyloguj{% endtrans %}</a> </li>
+                {% else %}
+                    <li><a href="{{ path("fos_user_security_login") }}">{% trans %}Logowanie{% endtrans %}</a> </li>
+                    <li><a href="{{ path("fos_user_registration_register") }}">{% trans %}Rejestracja{% endtrans %}</a> </li>
+                {% endif %}
             </ul>
-        </footer>
+        </nav>
+        <div class="banner">
+            <a href="{{ path("homepage") }}"><img class="logo" src={{ asset('/img/raakieta.png') }}></a>
+
+        </div>
+    </header>
+    <div class="content">
+        <aside>
+            <nav>{% block aside_nav %}
+                    <h3>{% trans %}Kategorie{% endtrans %}</h3>
+                    <ul>
+                        {{ render(controller(
+                        'AppBundle:Category:categoriesList'
+                        )) }}
+                    </ul>
+                {% endblock %}
+            </nav>
+        </aside>
+        <main>
+            <article>
+                {% block fos_user_content %}{% endblock %}
+            </article>
+        </main>
     </div>
-        {% block javascripts %}{% endblock %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    </body>
+    <div class="push"></div>
+</div>
+<div class="footer">
+    <footer>
+        <ul>
+            <li><a href="">Kontakt</a> </li>
+            <li><a href="">Bibliografia</a> </li>
+        </ul>
+    </footer>
+</div>
+{% block javascripts %}{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</body>
 </html>

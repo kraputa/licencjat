@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if access %}
+    <h1>Puzzle</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ puzzle.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ puzzle.title }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ puzzle.body |raw}}</td>
+            </tr>
+            <tr>
+                <th>Unlockquestion</th>
+                <td>{{ puzzle.unlockQuestion }}</td>
+            </tr>
+            <tr>
+                <th>Unlockanswer</th>
+                <td>{{ puzzle.unlockAnswer }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('puzzle_edit', { 'id': puzzle.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% else %}
+    <div class="unlock_question">
+        <h1>{{ puzzle.title }}</h1>
+        {% if puzzle.questionPicture %}
+            <img class="questionImage" src="/{{ puzzle.questionPicture.getWebPath }}">
+        {% else %}
+            <img class="default_questionImage" src={{ asset('/img/klodka.png') }}>
+        {% endif %}
+        <p class="question">
+            {{ puzzle.unlockQuestion }}
+        </p>
+        {{ form_start(unlock_form) }}
+        {{ form_errors(unlock_form) }}
+        {{ form_end(unlock_form) }}
+    </div>
+{% endif %}
+{% endblock %}

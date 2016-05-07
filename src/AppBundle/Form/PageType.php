@@ -2,10 +2,12 @@
 
 namespace AppBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PageType extends AbstractType
 {
@@ -18,12 +20,11 @@ class PageType extends AbstractType
         $builder
             ->add('shortName')
             ->add('title')
-            ->add('body')
-            ->add('unlockQuestion')
-            ->add('unlockAnswer')
-            ->add('questionPicture', EntityType::class, array(
-                'class' => 'AppBundle:Picture',
-                'choice_label' => 'name',
+            ->add('body',CKEditorType::class,array(
+                'config' => array(
+                    'uiColor' => '#ffffff',
+                    //...
+                ),
             ))
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',

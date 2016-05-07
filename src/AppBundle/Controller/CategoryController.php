@@ -73,15 +73,19 @@ class CategoryController extends Controller
      */
     public function showAction($category)
     {
-        $category=$this->getDoctrine()->getRepository("AppBundle:Category")->findOneBy(array(
+        $categoryRep=$this->getDoctrine()->getRepository("AppBundle:Category");
+
+        $category=$categoryRep->findOneBy(array(
             'shortName'=>$category
         ));
 
         if(!$category) throw new NotFoundHttpException;
-
+        $categories=$categoryRep->findAll();
         $deleteForm = $this->createDeleteForm($category);
         return $this->render('category/show.html.twig', array(
             'category' => $category,
+            'currentCategory' => $category,
+            'categories'=>$categories,
             'delete_form' => $deleteForm->createView(),
         ));
     }

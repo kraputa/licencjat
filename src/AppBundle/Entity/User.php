@@ -20,50 +20,49 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Page", inversedBy="users")
-     * @ORM\JoinTable(name="users_unlockedpages")
+     * @ORM\ManyToMany(targetEntity="Puzzle", inversedBy="users")
+     * @ORM\JoinTable(name="users_unlockedpuzzles")
      */
-    protected $unlockedPages;
+    protected $unlockedPuzzles;
 
     public function __construct()
     {
         parent::__construct();
-        $this->unlockedPages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->unlockedPuzzles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
-
     /**
-     * Add unlockedPage
+     * Add unlockedPuzzle
      *
-     * @param \AppBundle\Entity\Page $unlockedPage
+     * @param \AppBundle\Entity\Puzzle $unlockedPuzzle
      *
      * @return User
      */
-    public function addUnlockedPage(\AppBundle\Entity\Page $unlockedPage)
+    public function addUnlockedPuzzle(\AppBundle\Entity\Puzzle $unlockedPuzzle)
     {
-        $this->unlockedPages[] = $unlockedPage;
+        $this->unlockedPuzzles[] = $unlockedPuzzle;
 
         return $this;
     }
 
     /**
-     * Remove unlockedPage
+     * Remove unlockedPuzzle
      *
-     * @param \AppBundle\Entity\Page $unlockedPage
+     * @param \AppBundle\Entity\Puzzle $unlockedPuzzle
      */
-    public function removeUnlockedPage(\AppBundle\Entity\Page $unlockedPage)
+    public function removeUnlockedPuzzle(\AppBundle\Entity\Puzzle $unlockedPuzzle)
     {
-        $this->unlockedPages->removeElement($unlockedPage);
+        $this->unlockedPuzzles->removeElement($unlockedPuzzle);
     }
 
     /**
-     * Get unlockedPages
+     * Get unlockedPuzzles
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUnlockedPages()
+    public function getUnlockedPuzzles()
     {
-        return $this->unlockedPages;
+        return $this->unlockedPuzzles;
     }
 }
