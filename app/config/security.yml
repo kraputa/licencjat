@@ -33,4 +33,4 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/.*/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/puzzle/, role: ROLE_USER }
+        - { path: ^/puzzle, role: ROLE_USER }

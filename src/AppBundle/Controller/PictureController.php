@@ -16,8 +16,8 @@ class PictureController extends Controller
      */
     public function indexAction(){
         $pictures=$this->getDoctrine()->getRepository("AppBundle:Picture")->findAll();
-        dump($pictures);exit;
-        return $this->render("picture/index.html.twig", array('pictures'=>$pictures));
+
+        return $this->render("picture/adminIndex.html.twig", array('pictures'=>$pictures));
     }
 
     /**

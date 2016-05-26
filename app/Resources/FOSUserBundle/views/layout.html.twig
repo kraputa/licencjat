@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="/css/main.css" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,100' rel='stylesheet' type='text/css'>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -38,12 +38,18 @@
             </ul>
         </nav>
         <div class="banner">
-            <a href="{{ path("homepage") }}"><img class="logo" src={{ asset('/img/raakieta.png') }}></a>
+           {# <a href="{{ path("homepage") }}"><img class="logo" src={{ asset('/img/raakieta.png') }}></a>#}
+
+            <a  href="{{ path("homepage") }}">
+                <div class="logo">
+                     {#<img  src={{ asset('/img/NAPIS.png') }}>#}<img  src={{ asset('/img/ROBOT.png') }}>
+                </div>
+        </a>
 
         </div>
     </header>
     <div class="content">
-        <aside>
+        {#<aside>
             <nav>{% block aside_nav %}
                     <h3>{% trans %}Kategorie{% endtrans %}</h3>
                     <ul>
@@ -53,7 +59,7 @@
                     </ul>
                 {% endblock %}
             </nav>
-        </aside>
+        </aside>#}
         <main>
             <article>
                 {% block fos_user_content %}{% endblock %}

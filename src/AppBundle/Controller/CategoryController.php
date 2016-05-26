@@ -33,6 +33,22 @@ class CategoryController extends Controller
     }
 
     /**
+     * Lists all Category entities.
+     *
+     * @Route("admin/category", name="admin_category_index")
+     * @Method("GET")
+     */
+    public function adminIndexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        return $this->render('category/adminIndex.html.twig', array(
+            'categories' => $categories,
+        ));
+    }
+    
+    
+    /**
      * Creates a new Category entity.
      *
      * @Route("admin/category/new", name="category_new")
@@ -117,8 +133,7 @@ class CategoryController extends Controller
 
         return $this->render('category/edit.html.twig', array(
             'category' => $category,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form' => $editForm->createView(),
         ));
     }
 

@@ -18,9 +18,15 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shortName')
-            ->add('title')
+
+            ->add('title', null, array(
+                'label'=>"Tytuł"
+            ))
+            ->add('shortName', null, array(
+                'label'=>"Skrócona nazwa"
+            ))
             ->add('body',CKEditorType::class,array(
+                'label'=>"Treść strony",
                 'config' => array(
                     'uiColor' => '#ffffff',
                     //...
@@ -29,6 +35,7 @@ class PageType extends AbstractType
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'choice_label' => 'title',
+                'label'=> 'Kategoria'
                 ))
         ;
     }

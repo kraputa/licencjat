@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block headtitle %}{% trans %}Zagadki - Panel administracyjny{% endtrans %}{% endblock %}
+{% block aside_nav %}
+    {{ include('default/adminNavigation.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="section">
+        <h1>{% block title %}{% trans %}Zagadki - panel administracyjny{% endtrans %}{% endblock %}</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Tytuł</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for puzzle in puzzles %}
+                <tr>
+                    <td>{{ puzzle.id }}</td>
+                    <td><a href="{{ path('puzzle_show', { 'id': puzzle.id }) }}">{{ puzzle.title }}</a></td>
+                    <td>
+                        <a class="action" href="{{ path('puzzle_edit', { 'id': puzzle.id }) }}">Edytuj</a>
+                        <a class="action delete"  href="{{ path('puzzle_delete', { 'id': puzzle.id}) }}">Usuń</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table><a class="action non-float" href="{{ path('puzzle_new') }}">Dodaj nową zagadkę</a>
+    </div>
+
+
+
+
+{% endblock %}

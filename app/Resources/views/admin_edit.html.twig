@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/form_registration_layout.html.twig' %}
+{% block aside_nav %}
+    {{ include('default/adminNavigation.html.twig') }}
+{% endblock %}
+{% block body %}
+    <div class="section">
+        <h1>{% block title %}{% endblock %}</h1>
+        {{ form_start(form, {'attr': {'class': 'edit_page'} }) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Zapisz zmiany" />
+        {{ form_end(form) }}
+        <p>* Pola wymagane</p>
+    </div>
+
+{% endblock %}

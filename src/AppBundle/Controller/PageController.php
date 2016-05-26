@@ -81,7 +81,21 @@ class PageController extends Controller
         );
         return $this->render('page/show.html.twig', $view);
     }
-    
+
+    /**
+     * Finds and displays a Page entity.
+     *
+     * @Route("/admin/page", name="admin_page_index")
+     * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function adminIndexAction()
+    {
+        $pages=$this->getDoctrine()->getRepository("AppBundle:Page")->findAll();
+        $view=array('pages' => $pages,
+        );
+        return $this->render('page/adminIndex.html.twig', $view);
+    }
 
     /**
      * Displays a form to edit an existing Page entity.
@@ -110,8 +124,7 @@ class PageController extends Controller
 
         return $this->render('page/edit.html.twig', array(
             'page' => $page,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form' => $editForm->createView(),
         ));
     }
 

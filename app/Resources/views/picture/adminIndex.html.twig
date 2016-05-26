@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block headtitle %}{% trans %}Obrazki -Panel administracyjny{% endtrans %}{% endblock %}
+{% block aside_nav %}
+    {{ include('default/adminNavigation.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="section">
+    <h1>{% block title %}{% trans %}Obrazki - panel administracyjny{% endtrans %}{% endblock %}</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nazwa</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+                <td>{{ picture.id }}.</td>
+                <td><img class="questionImage" src="/{{ picture.webPath }}" ></td>
+                <td>
+                    <a class="action delete"  href="{{ path('delete_picture', { 'id': picture.id}) }}">Usuń</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="action" href="{{ path('upload_picture') }}">Dodaj obrazek</a>
+</div>
+
+
+
+
+{% endblock %}

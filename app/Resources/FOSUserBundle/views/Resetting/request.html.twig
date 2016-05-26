@@ -1,5 +1,8 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-{% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+    <div class="registration">
+        <h1>Nie pamiętasz hasła?</h1>
+        {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+    </div>
 {% endblock fos_user_content %}

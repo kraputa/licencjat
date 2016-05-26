@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
  */
 class PuzzleController extends Controller
 {
+
     /**
      * Lists all Puzzle entities.
      *
@@ -32,6 +33,22 @@ class PuzzleController extends Controller
         $puzzles = $em->getRepository('AppBundle:Puzzle')->findAll();
 
         return $this->render('puzzle/index.html.twig', array(
+            'puzzles' => $puzzles,
+        ));
+    }
+    /**
+     * Lists all Puzzle entities.
+     *
+     * @Route("admin/puzzle", name="admin_puzzle_index")
+     * @Method("GET")
+     */
+    public function adminIndexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $puzzles = $em->getRepository('AppBundle:Puzzle')->findAll();
+
+        return $this->render('puzzle/adminIndex.html.twig', array(
             'puzzles' => $puzzles,
         ));
     }
@@ -171,8 +188,7 @@ $view=array('puzzle'=>$puzzle);
 
         return $this->render('puzzle/edit.html.twig', array(
             'puzzle' => $puzzle,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form' => $editForm->createView(),
         ));
     }
 

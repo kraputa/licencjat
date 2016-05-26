@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block headtitle %}{% trans %}Kategorie -Panel administracyjny{% endtrans %}{% endblock %}
+{% block aside_nav %}
+    {{ include('default/adminNavigation.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="section">
+    <h1>{% block title %}{% trans %}Kategorie - panel administracyjny{% endtrans %}{% endblock %}</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nazwa</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}. </td>
+                <td><a href="{{ path('category_show', { 'category': category.shortName }) }}">{{ category.title }}</a></td>
+                <td>
+                    <a class="action" href="{{ path('category_edit', { 'id': category.id }) }}">Edytuj</a>
+                    <a class="action delete"  href="{{ path('category_delete', { 'id': category.id}) }}">Usuń</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="action" href="{{ path('category_new') }}">Dodaj nową kategorię</a>
+</div>
+
+
+
+
+{% endblock %}

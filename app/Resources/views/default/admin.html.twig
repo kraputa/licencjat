@@ -1,63 +1,44 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}{% endblock %}
-{% block title %}{% trans %}Homepage{% endtrans %}{% endblock %}
 {% block aside_nav %}
-    <h3>{% trans %}Na skróty{% endtrans %}</h3>
-    <ul>
-        <li><a href="{{ path("category_new") }}">Dodaj kategorię</a></li>
-        <li><a href="{{ path("page_new") }}">Dodaj artykuł</a></li>
-        <li><a href="{{ path("puzzle_new") }}">Dodaj zagadkę</a></li>
-    </ul>
-
+   {{ include('default/adminNavigation.html.twig') }}
 {% endblock %}
 
 
 
 {% block body %}
     <div class="section">
-        <h1>{% trans %}Panel Administracyjny{% endtrans %}</h1>
-    </div>
-    <div class="section">
-        <h2>Ostatnio dodane</h2>
-        <h3>Artykuły</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nazwa </th>
-                    <th>Kategoria </th>
-                    <th>Akcje </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="section">
-        <h3>Kategorie</h3><a href="{{ path("category_index") }}">Zobacz wszystkie</a>
-        <table>
-            <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>Nazwa </th>
-                <th>Akcje </th>
-            </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="section">
-        <h3>Zagadki</h3>
-        <table>
-            <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>Nazwa </th>
-                <th>Akcje </th>
-            </tr>
-            </thead>
-        </table>
-    </div>
+        <h1>{% block title %}{% trans %}Panel Administracyjny{% endtrans %}{% endblock %}</h1>
+
+        <ul><li>
+                Kategorie
+                <ul>
+                    <li><a href="{{ path("category_new") }}">Dodaj kategorię</a></li>
+                    <li><a href="{{ path("admin_category_index") }}">Wyświetl kategorie</a></li>
+                </ul>
+            </li>
+            <li>
+                Artykuły
+                <ul>
+                    <li><a href="{{ path("page_new") }}">Dodaj artykuł</a></li>
+                    <li><a href="{{ path("admin_page_index") }}">Wyświetl artykuły</a></li>
+                </ul>
+            </li>
+            <li>
+                Zagadki
+                <ul>
+                    <li><a href="{{ path("puzzle_new") }}">Dodaj zagadkę</a></li>
+                    <li><a href="{{ path("admin_puzzle_index") }}">Wyświetl zagadki</a></li>
+                </ul>
+            </li>
+            <li>
+                Obrazki
+                <ul>
+                    <li><a href="{{ path("upload_picture") }}">Dodaj obrazki</a></li>
+                    <li><a href="{{ path("picture_index") }}">Wyświetl obrazki</a></li>
+                </ul>
+            </li>
+        </ul>
+        </div>
 {% endblock %}
 {% block javascripts %}{% endblock %}
