@@ -20,39 +20,10 @@
     </ul>
 
 {% endblock %}
-
-
+{% block headtitle %}{{ page.title }}{% endblock %}
 {% block body %}
-    <h1>Page</h1>
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ page.id }}</td>
-            </tr>
-            <tr>
-                <th>Shortname</th>
-                <td>{{ page.shortName }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ page.title }}</td>
-            </tr>
-            <tr>
-                <th>Body</th>
-                <td>{{ page.body |raw}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('page_edit', { 'id': page.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(deleteForm) }}
-                <input type="submit" value="Delete">
-            {{ form_end(deleteForm) }}
-        </li>
-    </ul>
+<div class="section">
+    <h1>{% block title %}{{ page.title }}{% endblock %}</h1>
+	{{ page.body |raw}}
+</div>
 {% endblock %}

@@ -20,7 +20,7 @@
         {% for page in pages %}
             <tr>
                 <td>{{ page.id }}.</td>
-                <td><a href="{{ path('page_show', { 'category':page.category.id ,'page': page.id }) }}">{{ page.title }}</a></td>
+                <td><a href="{{ path('page_show', { 'category':page.category.shortName ,'page': page.shortName }) }}">{{ page.title }}</a></td>
                 <td>
                     <a class="action" href="{{ path('page_edit', { 'id': page.id }) }}">Edytuj</a>
                     <a class="action delete"  href="{{ path('page_delete', { 'id': page.id}) }}">Usuń</a>

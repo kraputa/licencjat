@@ -1,43 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Shortname</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td><a href="{{ path('category_show', { 'category': category.shortName }) }}">{{ category.id }}</a></td>
-                <td>{{ category.title }}</td>
-                <td>{{ category.shortName }}</td>
-                <td>{{ category.description }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('category_show', { 'category': category.shortName }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+<div class="section">
+    <h1>{% block title %}{% trans %}Kategorie{% endtrans %}{% endblock %}</h1>
+     {% for category in categories %}
+        <a href="{{ path('category_show', { 'category': category.shortName }) }}">
+            <div class="puzzle-box">
+				<div class="puzzle-image">
+                    <img class="default_questionImage" src={{ asset('/img/klodka.png') }}>
+                 
+                </div>
+                <div class="puzzle-title">
+                    <p>{{ category.title }}</p>
+                </div>
+            </div>
+        
+        </a>
+       
+    {%  endfor %}
+    
+</div>
 {% endblock %}

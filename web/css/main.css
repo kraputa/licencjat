@@ -153,8 +153,10 @@ margin: 0 auto;
     .banner{
        /* background: #F4C515 url("/img/circuit.png"); */
         background: #F4C515 url("/img/TAPE.png") no-repeat center;
-
         height: 300px;
+		-webkit-box-shadow: 0px 3px 34px 0px rgba(199,166,46,0.44);
+		-moz-box-shadow: 0px 3px 34px 0px rgba(199,166,46,0.44);
+		box-shadow: 0px 3px 34px 0px rgba(199,166,46,0.44);
     }
    /* .logo-napis{
         left: calc(50% - 202px);
