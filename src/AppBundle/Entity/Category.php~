@@ -151,28 +151,4 @@ class Category
     {
         return $this->pages;
     }
-
-    /**
-     * Set picture
-     *
-     * @param \AppBundle\Entity\Picture $picture
-     *
-     * @return Category
-     */
-    public function setPicture(\AppBundle\Entity\Picture $picture = null)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return \AppBundle\Entity\Picture
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
 }

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CategoryType extends AbstractType
 {
@@ -22,12 +23,11 @@ class CategoryType extends AbstractType
             ->add('shortName', null, array(
                 'label'=>"Skrócona nazwa"
             ))
-            ->add('description',CKEditorType::class,array(
-                'label'=>'Opis',
-                'config' => array(
-                    'uiColor' => '#ffffff',
-                    //...
-                ),
+            ->add('picture', EntityType::class, array(
+                'class' => 'AppBundle:Picture',
+                'choice_label' => 'name',
+                'required' => false,
+                'label' => 'Ilustracja'
             ))
         ;
     }

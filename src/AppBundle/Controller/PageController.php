@@ -37,7 +37,7 @@ class PageController extends Controller
             $em->persist($page);
             $em->flush();
 
-            $message=$this->get('translator')->trans('New page created!');
+            $message=$this->get('translator')->trans('Dodano artykuł!');
             $this->addFlash(
                 'success',
                 $message
@@ -114,12 +114,13 @@ class PageController extends Controller
             $em->persist($page);
             $em->flush();
 
-            $message=$this->get('translator')->trans('Page updated!');
+            $message=$this->get('translator')->trans('Zmiany zotały zapisane!');
             $this->addFlash(
                 'success',
                 $message
             );
-            return $this->redirectToRoute('page_edit', array('id' => $page->getId()));
+            return $this->redirectToRoute('page_show', array('page' => $page->getShortName(),
+                'category' =>$page->getCategory()->getShortName()));
         }
 
         return $this->render('page/edit.html.twig', array(
@@ -144,7 +145,7 @@ class PageController extends Controller
             $em->remove($page);
             $em->flush();
 
-            $message=$this->get('translator')->trans('Page deleted!');
+            $message=$this->get('translator')->trans('Artykuł został usunięty!');
             $this->addFlash(
                 'success',
                 $message

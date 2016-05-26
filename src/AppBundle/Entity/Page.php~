@@ -57,6 +57,13 @@ class Page
      */
     private $category;
 
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Picture")
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id")
+     *
+     */
+    private $picture;
 
     /**
      * Page constructor.
@@ -169,5 +176,39 @@ class Page
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add puzzle
+     *
+     * @param \AppBundle\Entity\Puzzle $puzzle
+     *
+     * @return Page
+     */
+    public function addPuzzle(\AppBundle\Entity\Puzzle $puzzle)
+    {
+        $this->puzzles[] = $puzzle;
+
+        return $this;
+    }
+
+    /**
+     * Remove puzzle
+     *
+     * @param \AppBundle\Entity\Puzzle $puzzle
+     */
+    public function removePuzzle(\AppBundle\Entity\Puzzle $puzzle)
+    {
+        $this->puzzles->removeElement($puzzle);
+    }
+
+    /**
+     * Get puzzles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPuzzles()
+    {
+        return $this->puzzles;
     }
 }

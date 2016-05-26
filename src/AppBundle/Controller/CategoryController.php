@@ -128,7 +128,7 @@ class CategoryController extends Controller
                 'success',
                 $message
             );
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            return $this->redirectToRoute('category_show', array('category' => $category->getShortName()));
         }
 
         return $this->render('category/edit.html.twig', array(

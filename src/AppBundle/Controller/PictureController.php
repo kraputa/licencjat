@@ -35,6 +35,7 @@ class PictureController extends Controller
         $form=$this->createFormBuilder($picture)
             ->add('name')
             ->add('file')
+            ->add('alt')
             ->getForm();
         $form->handleRequest($request);
 

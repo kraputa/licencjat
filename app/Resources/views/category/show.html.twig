@@ -24,13 +24,19 @@
 <div class="section">
     <h1>{% block title %}{{category.title}}{% endblock %}</h1>
      {% for page in category.pages %}
+
+
        <a href="{{ path("page_show", {"category":category.shortName, "page":page.shortName }) }}">
-            <div class="puzzle-box">
-				<div class="puzzle-image">
-                    <img class="default_questionImage" src={{ asset('/img/klodka.png') }}>
-                 
+         <div class="thumbnail-box">
+             <div class="thumbnail-image">
+                 {% if page.picture %}
+                     <img class="thumbnailImage" src="/{{ page.picture.getWebPath }}">
+                 {% else %}
+                     <img class="thumbnailImage" src={{ asset('/img/klodka.png') }}>
+                 {% endif %}
+
                 </div>
-                <div class="puzzle-title">
+                <div class="thumbnail-title">
                     <p>{{ page.title }}</p>
                 </div>
             </div>

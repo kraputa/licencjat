@@ -314,7 +314,7 @@ margin: 0 auto;
 
 
     }
-    .questionImage, .default_questionImage{
+    .questionImage, .default_questionImage, .thumbnailImage{
         margin: 0 auto;
         max-height: 150px;
         max-width: 200px;
@@ -322,15 +322,16 @@ margin: 0 auto;
 
     }
 
-    .puzzle-image{
+    .puzzle-image, .thumbnail-image{
         width: 200px;
         height: 150px;
         margin: 0px auto;
+        position: relative;
 
     }
 
     .puzzle-image{
-        position: relative;
+
     }
 
     .locked-image .after {
@@ -359,12 +360,25 @@ margin: 0 auto;
         background-color: white;
         width: calc(200px + 4em);
     }
-    .puzzle-title{
+
+    .thumbnail-box{
+        color: black;
+        float: left;
+        margin: 1em;
+        padding: 0.5em;
+        background-color: white;
+        width: calc(200px + 4em);
+    }
+    .puzzle-title, .thumbnail-title{
         /*border: 1px solid #000;*/
         padding-left: 0.5em;
         margin-top: 0.5em;
         /*background-color: #111111;*/
         font-weight: lighter;
+    }
+
+    .thumbnail-title{
+        text-align: center;
     }
     iframe{
         width: 100%;

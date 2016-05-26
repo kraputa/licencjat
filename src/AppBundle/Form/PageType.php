@@ -37,6 +37,12 @@ class PageType extends AbstractType
                 'choice_label' => 'title',
                 'label'=> 'Kategoria'
                 ))
+            ->add('picture', EntityType::class, array(
+                'class' => 'AppBundle:Picture',
+                'choice_label' => 'name',
+                'required' => false,
+                'label' => 'Ilustracja'
+            ))
         ;
     }
     

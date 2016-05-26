@@ -5,12 +5,18 @@
     <h1>{% block title %}{% trans %}Kategorie{% endtrans %}{% endblock %}</h1>
      {% for category in categories %}
         <a href="{{ path('category_show', { 'category': category.shortName }) }}">
-            <div class="puzzle-box">
-				<div class="puzzle-image">
-                    <img class="default_questionImage" src={{ asset('/img/klodka.png') }}>
-                 
+            <div class="thumbnail-box">
+				<div class="thumbnail-image">
+
+                    {% if category.picture %}
+                        <img class="thumbnailImage" src="/{{ category.picture.getWebPath }}">
+                    {% else %}
+                        <img class="thumbnailImage" src={{ asset('/img/klodka.png') }}>
+                    {% endif %}
                 </div>
-                <div class="puzzle-title">
+
+
+                <div class="thumbnail-title">
                     <p>{{ category.title }}</p>
                 </div>
             </div>
